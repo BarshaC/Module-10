@@ -1,9 +1,10 @@
-cipher_num = int(input("What is your cipher number? "))
-code = input(("What is your message? "))
+import sys
+cipher = int(sys.argv[1])
+code = sys.stdin.read()
 length_code = len(code)
 cracked = False
 encode = ''
-decode = ''
+store_val = bool()
 import string
 while not cracked:
     for k in range(length_code):
@@ -16,13 +17,13 @@ while not cracked:
         if ch == " " or ch in string.punctuation :
           total = ord(ch)
         else:
-          total = ord(ch) + cipher_num
+          total = ord(ch) + cipher
         if total >90 and ch not in string.punctuation and ch != " ":
           total = total-26
         elif total < 65 and ch not in string.punctuation and ch != " ":
           total = total + 26
         output_code = chr(total)
-        if output_code not in string.punctuation and output_code != " ":
+        if output_code not in string.punctuation:
           result = output_code
         if store_val == True:
           result = result.upper()
@@ -33,11 +34,13 @@ while not cracked:
     k= encode.upper()
 g= ''
 for j in k:
-    if j != ' ':
+    if j in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
         g= g + j
 a = 0
-for x in range(0,len(k),5):
+for x in range(5,len(g),5):
     print(g[a:x], end =' ')
     a = x
+
 print(g[x:(len(g)+1)])
-    
+
+
